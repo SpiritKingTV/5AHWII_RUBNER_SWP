@@ -1,0 +1,47 @@
+import random
+
+
+pcChoise = random.randint(0,3)
+
+
+
+
+def anleitung():
+    print("Eingabe:")
+    print("Rock... r")
+    print("Paper... p")
+    print("Scissors... s")
+
+def input1():
+    answ = "h"
+    while(answ != "r" or answ != "s" or answ != "p"):
+        answ = input("Choose an option[r/p/s]: ")
+        if(answ == "r" or answ == "s" or answ == "p"):
+            return answ
+
+def translate(answer1):
+    if(answer1 == "r"):
+        return 1
+    elif(answer1 =="p"):
+        return 2
+    elif(answer1=="s"):
+        return 3
+    #1Stein
+    #2Papier
+    #3Schere
+result = input1()
+translate(result)
+if(pcChoise == result):
+    print("Unentschieden!")
+elif(pcChoise == 1 and result == 2):
+    print("Gewonnen!")
+elif(pcChoise==2 and result==3):
+    print("Gewonnen!")
+elif(pcChoise==3 and result==1):
+    print("Gewonnen!")
+else:
+    print("Verloren!")
+
+
+
+
