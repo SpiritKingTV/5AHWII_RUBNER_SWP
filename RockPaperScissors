@@ -1,47 +1,73 @@
+from kivy.app import App
+from kivy.uix.widget import Widget
+from kivy.properties import ObjectProperty
+from kivy.uix.button import Button
+
+class GameLogic(Widget):
+    btn1 = ObjectProperty()
+    btn2 = ObjectProperty()
+    btn3 = ObjectProperty()
+    btn4 = ObjectProperty()
+    btn5 = ObjectProperty()
+
+
+
+class StartApp(App):
+    def build(self):
+        return GameLogic()
+
+
+if __name__ == "__main__":
+    StartApp().run()
+
+
+
+
+
+
 import random
+print("Pick one of these (write it)")
+print("-------------------")
+print("Rock")
+print("Paper")
+print("Scissors")
+print("Lizard")
+print("Spock")
+print("-------------------")
 
 
-pcChoise = random.randint(0,3)
+def eingabe(check):
+    wahl = input("Choose: ")
+    if wahl in check:
+        return wahl
 
 
+def compare(player, computer, value, result):
+    print("Player answer:" + player)
+    print("Computer answer:" + computer)
+    calc = value[player] - value[computer]
+    return result[calc % 5]
 
 
-def anleitung():
-    print("Eingabe:")
-    print("Rock... r")
-    print("Paper... p")
-    print("Scissors... s")
-
-def input1():
-    answ = "h"
-    while(answ != "r" or answ != "s" or answ != "p"):
-        answ = input("Choose an option[r/p/s]: ")
-        if(answ == "r" or answ == "s" or answ == "p"):
-            return answ
-
-def translate(answer1):
-    if(answer1 == "r"):
-        return 1
-    elif(answer1 =="p"):
-        return 2
-    elif(answer1=="s"):
-        return 3
-    #1Stein
-    #2Papier
-    #3Schere
-result = input1()
-translate(result)
-if(pcChoise == result):
-    print("Unentschieden!")
-elif(pcChoise == 1 and result == 2):
-    print("Gewonnen!")
-elif(pcChoise==2 and result==3):
-    print("Gewonnen!")
-elif(pcChoise==3 and result==1):
-    print("Gewonnen!")
-else:
-    print("Verloren!")
+def stop():
+    while True:
+        playforward = input("Play again [y/n]: ")
+        if playforward == "y":
+            return True
+        elif playforward == "n":
+            return False
 
 
-
+state = True
+while state:
+    listuser = ["Rock", "Paper", "Scissors", "Lizard", "Spock"]
+    listcomputer = ["Rock", "Paper", "Scissors", "Lizard", "Spock"]
+    listvalues = {"Scissors": 4, "Rock": 0, "Paper": 2, "Lizard": 3, "Spock": 1}
+    result = ["Draw", "Player won", "Player won", "Player lost", "Player lost"]
+    answerUser = eingabe(listuser)
+    answerComputer = random.choice(listcomputer)
+    print(compare(answerUser, answerComputer, listvalues, result))
+    print(answerComputer, answerUser, listvalues.get(answerComputer,
+          "Not defined"), listvalues.get(answerUser, "Not defined"))
+    state = stop()
 
