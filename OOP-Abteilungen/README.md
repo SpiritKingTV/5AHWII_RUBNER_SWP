@@ -9,4 +9,4 @@ Danach mussten wir...
 * Männerquote in %
 ...ausgeben
 
-![alt text](https://github.com/SpiritKingTV/5AHWII_RUBNER_SWP/new/main/OOP-Abteilungen/bsp.png)
+![alt text](https://github.com/SpiritKingTV/5AHWII_RUBNER_SWP/new/main/OOP-Abteilungen/Bild_2021-12-23_133115.png)
