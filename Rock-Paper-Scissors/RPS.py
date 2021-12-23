@@ -1,5 +1,6 @@
 import random
 import time
+import requests
 import dbStuff
 options = ["rock","spock","paper","lizard","scissors"]
 
@@ -97,6 +98,20 @@ def summaryforDB(userinput,values):
     newvalues = name,rock,paper,scissors,lizard,spock
     return newvalues
 
+def sendRequest(username, voteScissors, voteRock, votePaper, voteSpock, voteLizard, apiIP = "http://127.0.0.1:5000"):
+    reqUrl = apiIP + "/v1/updateRecord"
+    reqUrl+= "?username=" + str(username) + "&voteScissors=" + str(voteScissors)
+    reqUrl+= "&voteRock=" + str(voteRock) + "&votePaper=" + str(votePaper)
+    reqUrl+= "&voteSpock=" + str(voteSpock) + "&voteLizard=" + str(voteLizard)
+    responseCode = 0
+    try:
+        response = requests.post(reqUrl, None)
+        responseCode = response.status_code
+    except:
+        return 0
+    return responseCode
+
+
 
 #gameMode()
 userinput = inputOfUser()
@@ -104,18 +119,21 @@ pcinput = inputOfPC()
 erg = convertAndGetAnswers(userinput,pcinput)
 result = getresult(erg)
 matchReport(userinput,pcinput,result)
-if (result == "Victory"):
-    dbStuff.connect()
-    dbStuff.createTable()
-    if(dbStuff.nocolums() == 0):
-        dbStuff.firstInsert()
-    values = dbStuff.selectValues()
-    print(values)
-    newvalues= summaryforDB(userinput,values)
-    dbStuff.drop()
-    dbStuff.createTable()
-    print(newvalues)
-    dbStuff.insert(newvalues)
+dbStuff.connect()
+dbStuff.createTable()
+if(dbStuff.nocolums() == 0):
+    dbStuff.firstInsert()
+values = dbStuff.selectValues()
+newvalues= summaryforDB(userinput,values)
+dbStuff.drop()
+dbStuff.createTable()
+dbStuff.insert(newvalues)
+print("sending test request...")
+code = sendRequest(newvalues[0],newvalues[1],newvalues[2],newvalues[3],newvalues[4],newvalues[5])
+print("done")
+print("code= "+str(code))
+
+
 exit()
 
 
