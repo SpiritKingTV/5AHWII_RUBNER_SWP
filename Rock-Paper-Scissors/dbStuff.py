@@ -9,7 +9,7 @@ def connect():
     except:
         print("Connection didnt work")
         return 0
-    print("Connected")
+    #print("Connected")
     db_connection.close()
 
 
@@ -79,6 +79,4 @@ def firstInsert():
     cursor.execute("insert into results values ('Manuel Repetschnig',0,0,0,0,0)")
     db_connection.commit()
     db_connection.close()
-
-
 
