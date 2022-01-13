@@ -129,12 +129,9 @@ dbStuff.drop()
 dbStuff.createTable()
 dbStuff.insert(newvalues)
 print("sending test request...")
-code = sendRequest(newvalues[0],newvalues[1],newvalues[2],newvalues[3],newvalues[4],newvalues[5])
+code = sendRequest(newvalues[0],newvalues[3],newvalues[1],newvalues[2],newvalues[5],newvalues[4])
 print("done")
 print("code= "+str(code))
 
 
 exit()
-
-
-
