@@ -1,82 +1,142 @@
-##Database Stuff
+import random
+import time
+import requests
+import dbStuff
+
+options = ["rock", "spock", "paper", "lizard", "scissors"]
 
 
-import MySQLdb.connections
+def gameMode():
+    print("Gamemodes:")
+    print("One game...   1")
+    print("Best of 3...  3   //not finished")
+    print("Best of 5...  5   //not finished")
+    ans = input("choice: ")
+    print(ans)
+    if int(ans) == 1:
+        print("Game starts.", end="", flush=True)
+        time.sleep(0.25)
+        print(".", end="", flush=True)
+        time.sleep(0.25)
+        print(".", end="", flush=True)
+        time.sleep(1.25)
+        print(".", end="", flush=True)
+        print(".", end="", flush=True)
+        time.sleep(0.25)
+        print(".")
+        print("")
+        print("")
+        print("")
 
-def connect():
+
+def inputOfUser():
+    print("____________________________________")
+    print("rock, paper scissors, lizard, spock")
+    print("____________________________________")
+    print(" ")
+    userInput = input("choice: ").lower()
+    if userInput in options:
+        # print("bugTest UserInput: ",userInput)                                     bug test
+        return userInput
+    else:
+        print("Falsche Eingabe!!!")
+        exit()
+
+
+def inputOfPC():
+    inputPC = random.randint(0, 4)
+    # print("Test: InputPc ",inputPC)                                                bug test
+    return inputPC
+
+
+def convertAndGetAnswers(user, pc):
+    numberToWord = {"rock": 0, "paper": 2, "scissors": 4, "lizard": 3, "spock": 1}
+    usernum = numberToWord.get(user)
+    # print("BugTest-User: ",user,usernum)                                           bug test
+    pcnum = pc
+    return (usernum - pcnum) % 5
+
+
+def getPCWord(pc):
+    numberToWord = {"rock": 0, "paper": 2, "scissors": 4, "lizard": 3, "spock": 1}
+    pcnum = pc
+    pcWord = (list(numberToWord.keys())[list(numberToWord.values()).index((pcnum))])
+    # print("Bug-Test-PC:",pcnum,pcWord)                                             bug test
+    return pcWord
+
+
+def getresult(erg):
+    if erg == 0:
+        result = "Draw"
+    elif erg == 1 or erg == 2:
+        result = "Victory"
+    elif erg > 2:
+        result = "Defeat"
+    return result
+
+
+def matchReport(userInput, pcinput, result):
+    print("--------------------------------")
+    print("Match Result:")
+    print("You took:", userInput)
+    print("Pc took:", getPCWord(pcinput))
+    print("Match Status:", result)
+    print("--------------------------------")
+
+
+def summaryforDB(userinput, values):
+    name = values[0]
+    rock = values[1]
+    paper = values[2]
+    scissors = values[3]
+    lizard = values[4]
+    spock = values[5]
+    if userinput == "rock":
+        rock = rock + 1
+    elif userinput == "paper":
+        paper = paper + 1
+    elif userinput == "scissors":
+        scissors = scissors + 1
+    elif userinput == "lizard":
+        lizard = lizard + 1
+    elif userinput == "spock":
+        spock = spock + 1
+    newvalues = name, rock, paper, scissors, lizard, spock
+    return newvalues
+
+
+def sendRequest(username, voteScissors, voteRock, votePaper, voteSpock, voteLizard, apiIP="http://127.0.0.1:5000"):
+    reqUrl = apiIP + "/v1/updateRecord"
+    reqUrl += "?username=" + str(username) + "&voteScissors=" + str(voteScissors)
+    reqUrl += "&voteRock=" + str(voteRock) + "&votePaper=" + str(votePaper)
+    reqUrl += "&voteSpock=" + str(voteSpock) + "&voteLizard=" + str(voteLizard)
+    responseCode = 0
     try:
-        db_connection = MySQLdb.connect("localhost","root","ABC13Y@12Bz","RPS")
-    except:
-        print("Connection didnt work")
-        return 0
-    #print("Connected")
-    db_connection.close()
-
-
-def createTable():
-    try:
-        db_connection = MySQLdb.connect("localhost", "root", "ABC13Y@12Bz", "RPS")
+        response = requests.post(reqUrl, None)
+        responseCode = response.status_code
     except:
         return 0
-    connect()
-    sql = "create Table if not exists results(username varchar(30)not null,rock int, paper int, scissors int, lizard int, spock int);"
-    cursor = db_connection.cursor()
-    cursor.execute(sql)
-    db_connection.close()
-
-def selectValues():
-    try:
-        db_connection = MySQLdb.connect("localhost", "root", "ABC13Y@12Bz", "RPS")
-    except:
-        return 0
-
-  #select
-    sqlselect = "select * from results"
-    cursor = db_connection.cursor()
-    cursor.execute(sqlselect)
-    values = (cursor.fetchone())
-    db_connection.close()
-    return values;
-
-def drop():
-    try:
-        db_connection = MySQLdb.connect("localhost", "root", "ABC13Y@12Bz", "RPS")
-    except:
-        return 0
-    cursor = db_connection.cursor()
-    cursor.execute("drop table if exists results")
-    db_connection.close()
+    return responseCode
 
 
-def insert(values):
-    try:
-        db_connection = MySQLdb.connect("localhost", "root", "ABC13Y@12Bz", "RPS")
-    except:
-        return 0
-    cursor = db_connection.cursor()
-    sql = ("insert into results(username,rock,paper, scissors,lizard,spock) values(%s,%s,%s,%s,%s,%s)")
-    cursor.execute(sql,values)
-    db_connection.commit()
-    db_connection.close()
+# gameMode()
+userinput = inputOfUser()
+pcinput = inputOfPC()
+erg = convertAndGetAnswers(userinput, pcinput)
+result = getresult(erg)
+matchReport(userinput, pcinput, result)
+dbStuff.connect()
+dbStuff.createTable()
+if (dbStuff.nocolums() == 0):
+    dbStuff.firstInsert()
+values = dbStuff.selectValues()
+newvalues = summaryforDB(userinput, values)
+dbStuff.drop()
+dbStuff.createTable()
+dbStuff.insert(newvalues)
+print("sending test request...")
+code = sendRequest(newvalues[0], newvalues[3], newvalues[1], newvalues[2], newvalues[5], newvalues[4])
+print("done")
+print("code= " + str(code))
 
-def nocolums():
-    try:
-        db_connection = MySQLdb.connect("localhost", "root", "ABC13Y@12Bz", "RPS")
-    except:
-        return 0
-    cursor = db_connection.cursor()
-    cursor.execute("select count(username) from results")
-    valrow = (cursor.fetchone())
-    valrow1 = int(valrow[0])
-    return valrow1
-
-def firstInsert():
-    try:
-        db_connection = MySQLdb.connect("localhost", "root", "ABC13Y@12Bz", "RPS")
-    except:
-        return 0
-    cursor = db_connection.cursor()
-    cursor.execute("insert into results values ('Manuel Repetschnig',0,0,0,0,0)")
-    db_connection.commit()
-    db_connection.close()
-
+exit()
