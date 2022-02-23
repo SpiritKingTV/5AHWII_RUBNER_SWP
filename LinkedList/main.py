@@ -2,13 +2,16 @@ class Node:
     def __init__(self, val=0):
         self.val = val
         self.next = None
-
+        self.prev = None
 
 
 class lList:
     def __init__(self):
         self.lenght = 0
         self.top = None
+
+    def setNewTop(self, node):
+        self.top = node
 
     def attach(self, newNode):
         if self.top:
@@ -18,6 +21,7 @@ class lList:
                     break
                 lastNode = lastNode.next
             lastNode.next = newNode
+            newNode.prev = lastNode
         else:
             self.top = newNode
 
@@ -50,9 +54,13 @@ class lList:
             tempentry = tempentry.next
         return "not found"
 
-    def insertBefore(self):
-        # mach i nita --> double linked list
-        pass
+    def insertBefore(self, curr, newnode):
+        currprev = curr.prev
+        currprev.next = newnode
+        curr.prev = newnode
+        newnode.prev = currprev
+        newnode.next = curr
+
 
     def insertAfter(self, prevnode, newnode):
         templast = prevnode.next
@@ -60,9 +68,22 @@ class lList:
         prevnode.next = newnode
         print("worked?")
 
-    def deleteBefore(self):
-        # mach i nita --> double linked list
-        pass
+    def deleteBefore(self,curr):
+        if curr.prev is None:
+            print("Es gibt kein Element davor")
+            return
+        last = curr.prev
+        if last.prev is None:
+            print("Man müsste Top neu setzen")
+            return
+        lastoflast = last.prev
+        curr.prev = lastoflast
+        lastoflast.next = curr
+
+
+
+
+
 
     def deleteAfter(self, nodenow):
         todelete = nodenow.next
@@ -79,7 +100,7 @@ if __name__ == "__main__":
     val1 = Node(6)
     val2 = Node(4)
     val3 = Node(7)
-    #
+    # 500
     val4 = Node(5)
     val5 = Node(10)
 
@@ -100,6 +121,12 @@ if __name__ == "__main__":
     print(ll.returnLList())
     print("Top:")
     print(ll.top.val)
+    print("Insert Before:")
+    ll.insertBefore(val3,Node(200))
+    print(ll.returnLList())
+    print("Delete Before:")
+    ll.deleteBefore(val3)
+    print(ll.returnLList())
 
     #print(ll.find(6))
     #print(ll.find(1))
