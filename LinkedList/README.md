@@ -4,10 +4,9 @@ In diesem Beispiel lernen wir, was eine Linked List ist und wie man sie anwendet
 
 
 ## Eingebaute Features
-  * Node erstellt (mit nextValue und value)
-  * LinkedList erstellt (mit TopValue und lenght)
-  * asd
-  ** asd
+ * Klasse LinkedList erstellt (mit TopValue und length)
+  * Klasse Node erstellt (mit nextValue und value)
+  * attach
 
 ## Datenbank
 ![Datenbank](https://github.com/SpiritKingTV/5AHWII_RUBNER_SWP/blob/main/Rock-Paper-Scissors/Bild_2021-12-23_165555.png)
