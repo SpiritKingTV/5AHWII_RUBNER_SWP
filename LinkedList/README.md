@@ -2,7 +2,6 @@
 In diesem Beispiel lernen wir, was eine Linked List ist und wie man sie anwendet
 
 
-
 ## Eingebaute Klassen
  * Klasse LinkedList erstellt (mit TopValue und length)
  * Klasse Node erstellt (mit nextValue und value)
@@ -15,7 +14,12 @@ In diesem Beispiel lernen wir, was eine Linked List ist und wie man sie anwendet
 * insertBefore(self, curr, newnode) --> Erstellt eine Node in der LL vor einer ausgewählten Node
 * insertAfter(self,prevnode,newnode) --> Erstellt eine Node in der LL nach einer ausgewählten Node
 * deleteBefore(self,curr) -->  Löscht ein Node in der LL vor dem ausgewählten Node
-* * deleteAfter(self,nodenow) -->  Löscht ein Node in der LL nach dem ausgewählten Node
+* deleteAfter(self,nodenow) -->  Löscht ein Node in der LL nach dem ausgewählten Node
+Note: Für die Before-Methoden bracht man Double Linked Lists
+
+## erweiterung der LL zu einer Double-Linked-List
+Man fügt eine Variable (previous bzw. in meinem beispeil prev) hinzu.
+Dort wird die vorherige Node der LL eingetragen
 
 ## Interface mit Kivy
 Kommt noch....
