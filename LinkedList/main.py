@@ -95,7 +95,7 @@ if __name__ == "__main__":
 
     print("Print out whole List:")
     print(ll.returnLList())
-    print("DELETE THIS MOTHERFUCKER: ")
+    print("DELETE: ")
     ll.deleteAfter(val3)
     print(ll.returnLList())
     print("Top:")
