@@ -10,9 +10,6 @@ class lList:
         self.lenght = 0
         self.top = None
 
-    def setNewTop(self, node):
-        self.top = node
-
     def attach(self, newNode):
         if self.top:
             lastNode = self.top
@@ -41,10 +38,7 @@ class lList:
             while tempvar.next is not None:
                 self.lenght += 1
                 tempvar = tempvar.next
-            print(self.lenght)
-
-        # val = data
-        # top = head
+            return self.lenght
 
     def find(self, searchValue):
         tempentry = self.top
@@ -81,19 +75,10 @@ class lList:
         lastoflast.next = curr
 
 
-
-
-
-
     def deleteAfter(self, nodenow):
         todelete = nodenow.next
         nodeAfterDeleted = todelete.next
         nodenow.next = nodeAfterDeleted
-
-
-
-
-
 
 
 if __name__ == "__main__":
