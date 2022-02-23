@@ -17,7 +17,7 @@ In diesem Beispiel lernen wir, was eine Linked List ist und wie man sie anwendet
 * deleteAfter(self,nodenow) -->  Löscht ein Node in der LL nach dem ausgewählten Node
 Note: Für die Before-Methoden bracht man Double Linked Lists
 
-## erweiterung der LL zu einer Double-Linked-List
+## Erweiterung der LL zu einer Double-Linked-List
 Man fügt eine Variable (previous bzw. in meinem beispeil prev) hinzu.
 Dort wird die vorherige Node der LL eingetragen
 
