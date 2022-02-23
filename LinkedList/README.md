@@ -3,16 +3,20 @@ In diesem Beispiel lernen wir, was eine Linked List ist und wie man sie anwendet
 
 
 
-## Eingebaute Features
+## Eingebaute Klassen
  * Klasse LinkedList erstellt (mit TopValue und length)
-  * Klasse Node erstellt (mit nextValue und value)
-  * attach
+ * Klasse Node erstellt (mit nextValue und value)
 
-## Datenbank
-![Datenbank](https://github.com/SpiritKingTV/5AHWII_RUBNER_SWP/blob/main/Rock-Paper-Scissors/Bild_2021-12-23_165555.png)
+## Eingebaute Methoden
+* attach(self, newNode) --> Erstellt das erste Node oder hängt eines dran
+* returnLList(self) --> Gibt alle werte der Reihe nach in LinkedList zurück
+* returnlengthLlist(self) --> Gibt Länge der Linked List zurück
+* find(self, value) --> Gibt zurück, ob die Node in der LL existiert
+* insertBefore(self, curr, newnode) --> Erstellt eine Node in der LL vor einer ausgewählten Node
+* insertAfter(self,prevnode,newnode) --> Erstellt eine Node in der LL nach einer ausgewählten Node
+* deleteBefore(self,curr) -->  Löscht ein Node in der LL vor dem ausgewählten Node
+* * deleteAfter(self,nodenow) -->  Löscht ein Node in der LL nach dem ausgewählten Node
 
-Beim Spielstart wird eine Datenbank erstellt, wenn sie noch nichgt existiert hat.
-Nachdem die Runde entschieden wurde, wird die Tabellenzeile ausgelesen, gelöscht, verändert und wieder inserted
+## Interface mit Kivy
+Kommt noch....
 
-## API
-Die ergebnisse werden an die APi gesendet
