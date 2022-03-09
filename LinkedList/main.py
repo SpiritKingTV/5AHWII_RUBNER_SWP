@@ -55,30 +55,128 @@ class lList:
         newnode.prev = currprev
         newnode.next = curr
 
-
     def insertAfter(self, prevnode, newnode):
         templast = prevnode.next
         newnode.next = templast
         prevnode.next = newnode
+        # double linked
+        newnode.prev = prevnode
+        tempnew = newnode.next
+        tempnew.prev = newnode
+
         print("worked?")
 
-    def deleteBefore(self,curr):
+    def deleteBefore(self, curr):
         if curr.prev is None:
             print("Es gibt kein Element davor")
             return
         last = curr.prev
         if last.prev is None:
-            print("Man müsste Top neu setzen")
+            self.top = curr
+            curr.prev = None;
             return
         lastoflast = last.prev
         curr.prev = lastoflast
         lastoflast.next = curr
 
-
     def deleteAfter(self, nodenow):
         todelete = nodenow.next
         nodeAfterDeleted = todelete.next
         nodenow.next = nodeAfterDeleted
+        # double linked
+        nodeAfterDeleted.prev = nodenow;
+
+    def swap(self, firstNode, secondNode):
+        firstNode.val, secondNode.val = secondNode.val, firstNode.val
+
+    def sortAsc(self):
+        start = self.top
+        nextNode = None
+        while start is not None:
+            nextNode = start.next
+            while nextNode is not None and nextNode.prev is not None and nextNode.val < nextNode.prev.val:
+                self.swap(nextNode, nextNode.prev)
+                nextNode = nextNode.prev
+            start = start.next
+
+    def sortDesc(self):
+        start = self.top
+        nextNode = None
+        while start is not None:
+            nextNode = start.next
+            while nextNode is not None and nextNode.prev is not None and nextNode.val > nextNode.prev.val:
+                self.swap(nextNode, nextNode.prev)
+                nextNode = nextNode.prev
+            start = start.next
+
+
+class ArrayListImplementation:
+    def __init__(self):
+        self.list = []
+
+    def attach(self, val):
+        self.list.append(val)
+
+    def deleteAfter(self, index):
+        if index >= 0 and index < len(self.list):
+            if len(self.list) > index + 1:
+                self.list.pop(index + 1)
+
+    def deleteBefore(self, index):
+        if 0 <= index < len(self.list):
+            if index - 1 > -1:
+                self.list.pop(index - 1)
+
+    def insertAfter(self, index, newVal):
+        if 0 <= index < len(self.list):
+            self.list.insert(index + 1, newVal)
+
+    def insertBefore(self, index, newVal):
+        if 0 <= index < len(self.list):
+            if index - 1 >= 0:
+                self.list.insert(index, newVal)
+
+    # additional Methods
+
+    def deleteVal(self, index):
+        if 0 <= index < len(self.list):
+            self.list.pop(index)
+
+    def InsertAt(self, index, newVal):
+        if 0 <= index < len(self.list):
+            self.list.insert(index, newVal)
+
+    def returnAll(self):
+        for i in self.list:
+            print(i)
+
+    def returnLen(self):
+        print(len(self.list))
+
+    def find(self, valToFind):
+        for i in self.list:
+            if i == valToFind:
+                print("Value found!")
+
+    def sortAsc(self):
+        for i in self.list:
+            j = self.list.index(i)
+            while j > 0:
+                if self.list[j - 1] > self.list[j]:
+                    self.list[j - 1], self.list[j] = self.list[j], self.list[j - 1]
+                else:
+                    break
+                j -= 1
+
+    def sortDesc(self):
+        for i in self.list:
+            j = self.list.index(i)
+            while j > 0:
+                if self.list[j - 1] < self.list[j]:
+                    self.list[j - 1], self.list[j] = self.list[j], self.list[j - 1]
+                else:
+                    break
+                j -= 1
 
 
 if __name__ == "__main__":
@@ -107,14 +205,46 @@ if __name__ == "__main__":
     print("Top:")
     print(ll.top.val)
     print("Insert Before:")
-    ll.insertBefore(val3,Node(200))
+    ll.insertBefore(val3, Node(200))
     print(ll.returnLList())
     print("Delete Before:")
     ll.deleteBefore(val3)
     print(ll.returnLList())
+    print("Sort ASC")
+    ll.sortAsc()
+    print(ll.returnLList())
+    print("Sort DESC")
+    ll.sortDesc()
+    print(ll.returnLList())
 
-    #print(ll.find(6))
-    #print(ll.find(1))
+    alist = ArrayListImplementation()
+    print("ArrayList Implementation...")
+    alist.attach(2)
+    alist.attach(5)
+    alist.attach(7)
+    alist.attach(10)
+    alist.attach(12)
+    alist.attach(1)
+    alist.attach(13)
+    alist.returnAll()
+    print("Len...")
+    alist.returnLen()
+    print("deleteAfter second")
+    alist.deleteAfter(0)
+    alist.returnAll()
+    print("fill in second again(insertBEfore)")
+    alist.insertBefore(1,5)
+    alist.returnAll()
+    print("deleteBefore second")
+    alist.deleteBefore(2)
+    alist.returnAll()
+    print("insertAfter second again")
+    alist.insertAfter(0,5)
+    alist.returnAll()
 
-    #print("liste länge:")
-    #print(ll.returnlenghtLList())
+
+    # print(ll.find(6))
+    # print(ll.find(1))
+
+    # print("liste länge:")
+    # print(ll.returnlenghtLList())
