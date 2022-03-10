@@ -1,0 +1,71 @@
+
+BoxLayout:
+    orientation:"vertical"
+    MDToolbar:
+        title:"Übung Linked-List"
+    MDBottomNavigation:
+        MDBottomNavigationItem:
+            name:"main_creen"
+            icon:"home"
+            text:"Home"
+            MainScreen:
+        MDBottomNavigationItem:
+            name:"ll_screen"
+            icon:"filter-variant"
+            text:"Linked List"
+            LinkedListScreen:
+        MDBottomNavigationItem:
+            name:"al_screen"
+            icon:"code-array"
+            text:"ArrayList"
+            ArrayListScreen:
+
+
+<MainScreen>
+    id:mainscreen
+    MDLabel:
+        text:"Linked-List / ArrayList App"
+        pos_hint:{"center_x":0.5,"center_y":0.9}
+    MDLabel:
+        text:"In dieser App kann man eine Double Linked List erstellen und bearbeiten"
+        pos_hint:{"center_x":0.5,"center_y":0.8}
+    MDLabel:
+        text:"Python"
+        pos_hint:{"center_x":0.5,"center_y":0.7}
+
+<ArrayListScreen>
+    id: arraylistscreem
+    MDLabel:
+        text:"Attach Values to ArrayList"
+        pos_hint:{"center_x":0.5,"center_y":0.95}
+    TextInput:
+        id: valimput
+        #text:"Enter Number to add to list"
+        hint_text:"Enter a number.."
+        size_hint: (0.2, None)
+        height:30
+        pos_hint:{"center_x":0.35,"center_y":0.95}
+        multiline: False
+    MDRectangleFlatButton:
+        text:"submit"
+        on_press:self.parent.ar.attach(valimput.text)
+        pos_hint:{"center_x":0.55,"center_y":0.95}
+
+    ##get
+    MDLabel:
+        text:"Get List"
+        pos_hint:{"center_x":0.5,"center_y":0.8}
+    TextInput:
+        id: valout
+        hint_text:"Press Refresh!"
+        size_hint: (1, None)
+        height:30
+        pos_hint:{"center_x":0.1,"center_y":0.75}
+    MDRectangleFlatButton:
+        text:"refresh"
+        on_press: valout.text = "tets"
+        pos_hint:{"center_x":0.05,"center_y":0.65}
+
+
+
+
