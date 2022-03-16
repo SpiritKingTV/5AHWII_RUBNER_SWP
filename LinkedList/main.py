@@ -1,3 +1,6 @@
+import random
+
+
 class Node:
     def __init__(self, val=0):
         self.val = val
@@ -110,6 +113,9 @@ class lList:
             start = start.next
 
 
+
+
+
 class ArrayListImplementation:
     def __init__(self):
         self.list = []
@@ -151,7 +157,7 @@ class ArrayListImplementation:
             print(i)
 
     def returnLen(self):
-        print(len(self.list))
+        return len(self.list)
 
     def find(self, valToFind):
         for i in self.list:
@@ -159,90 +165,78 @@ class ArrayListImplementation:
                 print("Value found!")
 
     def sortAsc(self):
-        for i in self.list:
-            j = self.list.index(i)
-            while j > 0:
-                if self.list[j - 1] > self.list[j]:
-                    self.list[j - 1], self.list[j] = self.list[j], self.list[j - 1]
-                else:
-                    break
+        for i in range(1, self.returnLen()):
+            key = self.list[i]
+            j = i - 1
+            while j >= 0 and key < self.list[j]:
+                self.list[j + 1] = self.list[j]
                 j -= 1
+            self.list[j + 1] = key
 
     def sortDesc(self):
-        for i in self.list:
-            j = self.list.index(i)
-            while j > 0:
-                if self.list[j - 1] < self.list[j]:
-                    self.list[j - 1], self.list[j] = self.list[j], self.list[j - 1]
-                else:
-                    break
+        for i in range(1, self.returnLen()):
+            key = self.list[i]
+            j = i - 1
+            while j >= 0 and key > self.list[j]:
+                self.list[j + 1] = self.list[j]
                 j -= 1
+            self.list[j + 1] = key
+
+def generateVals(ll,arr,count):
+    import random
+    for i in range(count):
+        x = random.randint(0,1000)
+        arr.attach(x)
+        ll.attach(Node(x))
+def timemeasureLLAsc(ll):
+    import time
+    startTime = time.time();
+    ll.sortAsc()
+    endtime = time.time();
+    return endtime - startTime
+def timemeasureLLDesc(ll):
+    import time
+    startTime = time.time();
+    ll.sortDesc()
+    endtime = time.time();
+    return endtime - startTime
+
+def timemeasureArrAsc(ar):
+    import time
+    startTime = time.time();
+    ar.sortAsc()
+    endtime = time.time();
+    return endtime - startTime
+def timemeasureArrDesc(ar):
+    import time
+    startTime = time.time();
+    ar.sortDesc()
+    endtime = time.time();
+    return endtime - startTime
 
 
 if __name__ == "__main__":
-    val1 = Node(6)
-    val2 = Node(4)
-    val3 = Node(7)
-    # 500
-    val4 = Node(5)
-    val5 = Node(10)
-
     ll = lList()
-    ll.attach(val1)
-    ll.attach(val2)
-    ll.attach(val3)
-    ll.attach(val4)
-    ll.attach(val5)
+    ar = ArrayListImplementation()
+    arr = ArrayListImplementation()
+    arr.attach(1)
+    arr.attach(7)
+    arr.attach(4)
+    arr.attach(10)
 
-    print(ll.returnLList())
-    ll.insertAfter(val3, Node(500))
-
-    print("Print out whole List:")
-    print(ll.returnLList())
-    print("DELETE: ")
-    ll.deleteAfter(val3)
-    print(ll.returnLList())
-    print("Top:")
-    print(ll.top.val)
-    print("Insert Before:")
-    ll.insertBefore(val3, Node(200))
-    print(ll.returnLList())
-    print("Delete Before:")
-    ll.deleteBefore(val3)
-    print(ll.returnLList())
-    print("Sort ASC")
-    ll.sortAsc()
-    print(ll.returnLList())
-    print("Sort DESC")
-    ll.sortDesc()
-    print(ll.returnLList())
-
-    alist = ArrayListImplementation()
-    print("ArrayList Implementation...")
-    alist.attach(2)
-    alist.attach(5)
-    alist.attach(7)
-    alist.attach(10)
-    alist.attach(12)
-    alist.attach(1)
-    alist.attach(13)
-    alist.returnAll()
-    print("Len...")
-    alist.returnLen()
-    print("deleteAfter second")
-    alist.deleteAfter(0)
-    alist.returnAll()
-    print("fill in second again(insertBEfore)")
-    alist.insertBefore(1,5)
-    alist.returnAll()
-    print("deleteBefore second")
-    alist.deleteBefore(2)
-    alist.returnAll()
-    print("insertAfter second again")
-    alist.insertAfter(0,5)
-    alist.returnAll()
-
-
+    generateVals(ll,ar,1000)
+    #print(ar.returnAll())
+    timell=timemeasureLLAsc(ll)
+    timear=timemeasureArrAsc(ar)
+    #print("sorted:")
+    #print(ar.returnAll())
+    print("Results:")
+    print("Linked List: ", timell)
+    print("Array-List: ", timear)
+    if(timell> timear):
+        print("Linked List brauch Länger (", timell - timear, "Sekunden )")
+    else:
+        print("Array-List brauch Länger (", timear - timell, "Sekunden )")
     # print(ll.find(6))
     # print(ll.find(1))
 
