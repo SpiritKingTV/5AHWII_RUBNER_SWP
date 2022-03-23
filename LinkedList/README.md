@@ -27,16 +27,16 @@ Die selben Methoden wie bei double Linked List
 ## Tabelle der Aufwandsklassen
 | Methode       | double-linked-list | ArrayList|
 | ------------- | -------------   |--------------|
-| attach  | 1  |asasd|
-| returnAll  | n  |n|
-| returnLength  | n  |n|
-| find  | n  |n|
-| insertBefore 1 | Content Cell  |1|
-| insertAfter 1 | Content Cell  |1|
-| deleteBefore 1 | Content Cell  |1|
-| deleteAfter 1 | Content Cell  |1|
-|SortDesc  | n^2  |n^2|
-| SortAsc  | n^2  |n^2|
+|attach| 1  |asasd|
+|returnAll| n  |n|
+|returnLength| n  |n|
+|find| n  |n|
+|insertBefore| 1  |1|
+|insertAfter| 1  |1|
+|deleteBefore| 1  |1|
+|deleteAfter| 1  |1|
+|SortDesc| n^2  |n^2|
+|SortAsc| n^2  |n^2|
 
 ## Zeitmessung
 Zeitmessung der Sortierungen Aufsteigend bei 1000 Werten
