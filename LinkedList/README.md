@@ -21,7 +21,14 @@ Note: Für die Before-Methoden bracht man Double Linked Lists
 Man fügt eine Variable (previous bzw. in meinem beispeil prev) hinzu.
 Dort wird die vorherige Node der LL eingetragen
 
-## Interface mit Kivy
+## Erweiterung auf ArrayLists(Lists)
+Die selben Methoden wie bei double Linked List
+
+## Zeitmessung
+Zeitmessung der Sortierungen Aufsteigend bei 1000 Werten
+![Zeit](https://github.com/SpiritKingTV/5AHWII_RUBNER_SWP/blob/main/LinkedList/Bild_2022-03-23_201819.png)
+
+## Zusatz: Interface mit Kivy
 Im Interface kann man Momentan eine ArrayList erstellen bzw. Werte hinzufügen. Diese können danach mit Refresh abgefragt. Zudem werden sie ausgegeben
 Linked List: Bei linked List wurden sie noc nicht implementiert(Zeitmangel)
 ![Menü](https://github.com/SpiritKingTV/5AHWII_RUBNER_SWP/blob/main/LinkedList/Bild_2022-03-23_201308.png)
