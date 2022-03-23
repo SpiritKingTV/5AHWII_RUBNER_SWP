@@ -27,7 +27,7 @@ Die selben Methoden wie bei double Linked List
 ## Tabelle der Aufwandsklassen
 | Methode       | double-linked-list | ArrayList|
 | ------------- | -------------   |--------------|
-|attach| n  |n|
+|attach| n+1  |n+1/1|
 |returnAll| n  |n|
 |returnLength| n  |n|
 |find| n  |n|
