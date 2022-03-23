@@ -25,10 +25,10 @@ Dort wird die vorherige Node der LL eingetragen
 Die selben Methoden wie bei double Linked List
 
 ## Tabelle der Aufwandsklassen
-| M|ethode       | double-linked-list | ArrayList|
+| Methode       | double-linked-list | ArrayList|
 | ------------- | -------------   |--------------|
-| Content Cell  | Content Cell  |--------------|
-| Content Cell  | Content Cell  |-----------|
+| Content Cell  | Content Cell  |asasd|
+| Content Cell  | Content Cell  |asd|
 
 ## Zeitmessung
 Zeitmessung der Sortierungen Aufsteigend bei 1000 Werten
