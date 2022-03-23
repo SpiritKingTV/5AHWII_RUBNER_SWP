@@ -24,6 +24,12 @@ Dort wird die vorherige Node der LL eingetragen
 ## Erweiterung auf ArrayLists(Lists)
 Die selben Methoden wie bei double Linked List
 
+## Tabelle der Aufwandsklassen
+| M|ethode       | double-linked-list | ArrayList|
+| ------------- | -------------   |--------------|
+| Content Cell  | Content Cell  |--------------|
+| Content Cell  | Content Cell  |-----------|
+
 ## Zeitmessung
 Zeitmessung der Sortierungen Aufsteigend bei 1000 Werten
 ![Zeit](https://github.com/SpiritKingTV/5AHWII_RUBNER_SWP/blob/main/LinkedList/Bild_2022-03-23_201819.png)
